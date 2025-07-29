@@ -20,7 +20,9 @@ body {
 }
 
 body {
-  @apply bg-section font-sans text-black;
+  background-color: var(--background);
+  font-family: var(--font-sans);
+  color: #000;
 }
 
 h1, h2, h3 {

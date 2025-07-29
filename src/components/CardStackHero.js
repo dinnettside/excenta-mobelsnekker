@@ -78,7 +78,7 @@ export default function CardStackHero() {
             <footer className="w-full px-4 py-12 text-center bg-gray-900 text-white">
                 <h2 className="text-xl font-serif mb-2">Kontakt oss</h2>
                 <p className="text-sm">
-                    © {new Date().getFullYear()} Excenta AS – Håndverk som varer
+                    © {new Date().getFullYear()} Excenta AS
                 </p>
             </footer>
         </section>
