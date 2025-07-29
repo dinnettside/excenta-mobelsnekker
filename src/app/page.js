@@ -1,6 +1,7 @@
 'use client';
-import { useState } from 'react';
-import HeroSlider from '../components/HeroSlider';
+
+import { useState, useEffect } from 'react';
+import HeroSlider from './components/HeroSlider';
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -8,14 +9,14 @@ export default function Home() {
   const handleLinkClick = () => setMenuOpen(false);
 
   return (
-    <main className="min-h-screen relative">
-      {/* NAV */}
-      <nav className="fixed top-0 left-0 w-full z-50 bg-white shadow-md px-6 py-4 flex justify-between items-center">
+    <main className="min-h-screen bg-white text-gray-900 scroll-smooth relative">
+      {/* NAVIGASJON */}
+      <nav className="w-full px-6 py-4 flex justify-between items-center fixed top-0 left-0 z-50 bg-white shadow-md">
         <h1 className="text-2xl font-bold">Excenta</h1>
         <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden">
           <span className="text-xl">☰</span>
         </button>
-        <ul className={`fixed top-[70px] left-0 w-full bg-white z-40 flex flex-col md:flex-row md:static md:bg-transparent transition-all duration-300 ${menuOpen ? 'opacity-100' : 'opacity-0 md:opacity-100 pointer-events-none md:pointer-events-auto'}`}>
+        <ul className={`fixed top-[70px] left-0 w-full bg-white z-40 flex flex-col md:flex md:flex-row md:static md:w-auto md:bg-transparent transition-all duration-300 ${menuOpen ? 'opacity-100' : 'opacity-0 md:opacity-100 pointer-events-none md:pointer-events-auto'}`}>
           {[
             { href: '#tjenester', label: 'Tjenester' },
             { href: '#prosjekter', label: 'Prosjekter' },
@@ -24,13 +25,15 @@ export default function Home() {
             { href: '/blogg', label: 'Blogg' },
           ].map(({ href, label }) => (
             <li key={label}>
-              <a href={href} className="block px-6 py-3 hover:text-blue-500" onClick={handleLinkClick}>{label}</a>
+              <a href={href} className="block px-6 py-3 text-gray-800 hover:text-blue-500" onClick={handleLinkClick}>
+                {label}
+              </a>
             </li>
           ))}
         </ul>
       </nav>
 
-      {/* HERO */}
+      {/* HERO-SEKSJON */}
       <section className="relative h-[90vh] flex items-center justify-center text-center bg-black text-white">
         <HeroSlider />
         <div className="relative z-10 px-6">
@@ -42,57 +45,50 @@ export default function Home() {
       {/* TJENESTER */}
       <section id="tjenester" className="py-24 px-6 bg-white text-center">
         <h2 className="text-3xl font-serif font-bold mb-12">Våre tjenester</h2>
-        <div className="space-y-20 max-w-6xl mx-auto">
-          {/* BAD */}
-          <div className="flex flex-col md:flex-row items-center gap-8 text-left">
-            <img src="/tjeneste-bad.webp" alt="Baderomsinnredning" className="w-full md:w-1/2 rounded shadow" />
-            <p className="md:w-1/2 text-gray-700">
-              Vi lager spesialtilpasset baderomsinnredning i MDF, eik finer og laminat, alltid tilpasset rommets behov og stil.
-            </p>
-          </div>
-
-          {/* GARDEROBE */}
-          <div className="flex flex-col md:flex-row items-center gap-8 text-left">
-            <img src="/tjeneste-garderobe.webp" alt="Plassbygde garderober" className="w-full md:w-1/2 rounded shadow" />
-            <p className="md:w-1/2 text-gray-700">
-              Vi designer og bygger garderober på mål som maksimerer lagringsplass og funksjonalitet – tilpasset både skråtak og nisjer.
-            </p>
-          </div>
-
-          {/* KJØKKEN */}
-          <div className="flex flex-col md:flex-row items-center gap-8 text-left">
-            <img src="/tjeneste-kjoken.webp" alt="Skreddersydde kjøkken" className="w-full md:w-1/2 rounded shadow" />
-            <p className="md:w-1/2 text-gray-700">
-              Våre kjøkkenløsninger kombinerer funksjonalitet og design – laget i materialer som MDF, eik finer eller laminat etter ønske.
-            </p>
-          </div>
+        <div className="flex flex-col gap-12 max-w-5xl mx-auto">
+          {[ 
+            {
+              bilde: 'tjeneste-bad.webp',
+              tekst: 'Vi lager spesialtilpasset baderomsinnredning i MDF, eik finer og laminat, alltid tilpasset rommets mål og stil.'
+            },
+            {
+              bilde: 'tjeneste-garderobe.webp',
+              tekst: 'Vi designer og bygger garderober på mål som maksimerer lagringsplass og funksjonalitet.'
+            },
+            {
+              bilde: 'tjeneste-kjokken.webp',
+              tekst: 'Skreddersydde kjøkken i eik finer og laminat – bygget med fokus på funksjon, estetikk og varighet.'
+            }
+          ].map(({ bilde, tekst }, i) => (
+            <div key={i} className="flex flex-col md:flex-row items-center gap-6 text-left">
+              <img src={`/${bilde}`} alt="Tjeneste bilde" className="w-full md:w-1/2 rounded shadow" />
+              <p className="md:w-1/2 text-gray-800 text-lg">{tekst}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* PROSJEKTER */}
       <section id="prosjekter" className="py-24 px-6 bg-white text-center">
-        <h2 className="text-3xl font-serif font-bold mb-12">Tidligere prosjekter</h2>
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-serif font-bold mb-12">Prosjekter</h2>
+        <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
           {[
             {
-              bilde: 'kjokken1.webp',
-              tekst: 'Eikekjøkken tilpasset en familie i Oslo – skreddersydd med plass til både barn og gjester.',
-              alt: 'Skreddersydd kjøkken i eik'
+              bilde: 'images/kjokken1.webp',
+              tekst: 'Et elegant kjøkken laget i eik finer, skreddersydd etter kundens mål.'
             },
             {
-              bilde: 'skap1.webp',
-              tekst: 'Plassbygget oppbevaringsløsning i heltre, integrert i skråtak for optimal utnyttelse.',
-              alt: 'Skapløsning under skråtak'
+              bilde: 'images/skap1.webp',
+              tekst: 'Plassbygd oppbevaringsløsning i malt MDF – perfekt tilpasset skråtak.'
             },
             {
-              bilde: 'bad11.webp',
-              tekst: 'Moderne baderomsinnredning i minimalistisk stil med skyvedører og rene linjer.',
-              alt: 'Moderne baderomsinnredning'
+              bilde: 'images/bad11.webp',
+              tekst: 'Moderne baderomsinnredning med LED-speil og mørk, lun helhet.'
             },
-          ].map(({ bilde, tekst, alt }, i) => (
-            <div key={i} className="shadow rounded-lg overflow-hidden bg-white">
-              <img src={`/${bilde}`} alt={alt} className="w-full h-auto object-cover" />
-              <p className="mt-4 text-gray-700 text-sm px-4 pb-4">{tekst}</p>
+          ].map(({ bilde, tekst }, i) => (
+            <div key={i} className="text-left">
+              <img src={`/${bilde}`} alt="Prosjekt bilde" className="w-full h-auto object-cover rounded shadow" />
+              <p className="mt-4 text-gray-700 text-base">{tekst}</p>
             </div>
           ))}
         </div>
@@ -102,13 +98,13 @@ export default function Home() {
       <section id="hvorfor" className="py-24 px-6 bg-white text-center">
         <h2 className="text-3xl font-serif font-bold mb-6">Hvorfor velge oss</h2>
         <p className="max-w-3xl mx-auto text-gray-700 mb-8">
-          Vi er et lite, dedikert team i Lierdalen AS som brenner for godt håndverk. Våre møbler bygges på mål med fokus på detaljer, kvalitet og god kommunikasjon underveis.
+          Vi holder prisene nede fordi vi ikke lager førstehåndstegninger. Du sender oss målene dine, vi kommer på befaring, lager produksjonstegninger du godkjenner – og setter i gang produksjon.
         </p>
         <ul className="list-disc text-left max-w-xl mx-auto text-gray-700 space-y-2">
           <li>Skreddersøm tilpasset ditt rom og behov</li>
-          <li>Lokalt produsert i ekte materialer</li>
-          <li>Bilder, mål og tegninger underveis</li>
-          <li>Personlig oppfølging – du snakker direkte med snekkerne</li>
+          <li>Lokalt produsert i MDF, eik finer og laminat</li>
+          <li>Kunden sender mål og skisser, vi lager produksjonstegninger</li>
+          <li>Statusoppdateringer underveis og montering inkludert</li>
         </ul>
       </section>
 
@@ -116,13 +112,13 @@ export default function Home() {
       <section id="kontakt" className="py-24 px-6 bg-blue-50 text-center">
         <h2 className="text-3xl font-serif font-bold mb-6">Kontakt oss</h2>
         <p className="text-gray-700 mb-6">Ta kontakt for et gratis og uforpliktende møte – digitalt eller fysisk.</p>
-        <p className="text-lg text-gray-800">📧 <a href="mailto:post@mobelsnekker.no" className="underline hover:text-blue-600">post@mobelsnekker.no</a></p>
+        <p className="text-lg text-gray-800">📧 <a href="mailto:post@excenta.no" className="underline hover:text-blue-600">post@excenta.no</a></p>
         <p className="text-lg text-gray-800 mt-2">📞 <a href="tel:+4712345678" className="underline hover:text-blue-600">+47 12 34 56 78</a></p>
       </section>
 
       {/* FOOTER */}
       <footer className="bg-gray-900 text-white text-center py-6">
-        <p className="text-sm">© {new Date().getFullYear()} Møbelsnekker – Håndverk som varer. Laget av <a href="https://dinnettside.no" className="underline">DinNettside.no</a></p>
+        <p className="text-sm">© {new Date().getFullYear()} Excenta AS – laget av <a href="https://dinnettside.no" className="underline">dinnettside.no</a></p>
       </footer>
     </main>
   );
