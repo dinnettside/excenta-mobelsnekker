@@ -79,28 +79,37 @@ export default function Home() {
         </div>
       </div>
 
-      <section id="omoss" className={`${styles.fade} ${visibleSections["omoss"] ? styles.visible : ""}`}>
+      <section
+        id="omoss"
+        className={`${styles.section} ${styles.fade} ${visibleSections["omoss"] ? styles.visible : ""}`}
+      >
         <h2>Om oss</h2>
         <p>Excenta AS er en dedikert møbelsnekkerbedrift som spesialiserer seg på skreddersydde løsninger. Vi leverer kvalitet og presisjon – alltid tilpasset dine behov.</p>
       </section>
 
-      <section id="tjenester" className={`${styles.fade} ${visibleSections["tjenester"] ? styles.visible : ""}`}>
+      <section
+        id="tjenester"
+        className={`${styles.section} ${styles.fade} ${visibleSections["tjenester"] ? styles.visible : ""}`}
+      >
         <h2>Våre tjenester</h2>
         <div className={styles.service}>
-          <Image src="/images/tjenste-bad.webp" alt="Bad" width={600} height={400} placeholder="blur" blurDataURL="/images/tjenste-bad.webp" />
+          <Image src="/images/tjeneste-bad.webp" alt="Bad" width={600} height={400} placeholder="blur" blurDataURL="/images/tjeneste-bad.webp" />
           <p>Vi lager spesialtilpasset baderomsinnredning i MDF, eik finer og laminat, alltid tilpasset rommets dimensjoner og dine ønsker.</p>
         </div>
         <div className={styles.service}>
-          <Image src="/images/tjenste-garderobe.webp" alt="Garderobe" width={600} height={400} placeholder="blur" blurDataURL="/images/tjenste-garderobe.webp" />
+          <Image src="/images/tjeneste-garderobe.webp" alt="Garderobe" width={600} height={400} placeholder="blur" blurDataURL="/images/tjeneste-garderobe.webp" />
           <p>Vi designer og bygger garderober på mål som maksimerer lagringsplass og funksjonalitet.</p>
         </div>
         <div className={styles.service}>
-          <Image src="/images/tjenste-kjokken.webp" alt="Kjøkken" width={600} height={400} placeholder="blur" blurDataURL="/images/tjenste-kjokken.webp" />
+          <Image src="/images/tjeneste-kjokken.webp" alt="Kjøkken" width={600} height={400} placeholder="blur" blurDataURL="/images/tjeneste-kjokken.webp" />
           <p>Skreddersydde kjøkken i slitesterke og elegante materialer. Kundens tegninger er vårt utgangspunkt.</p>
         </div>
       </section>
 
-      <section id="prosjekter" className={`${styles.fade} ${visibleSections["prosjekter"] ? styles.visible : ""}`}>
+      <section
+        id="prosjekter"
+        className={`${styles.section} ${styles.fade} ${visibleSections["prosjekter"] ? styles.visible : ""}`}
+      >
         <h2>Prosjekter</h2>
         <div className={styles.project}>
           <Image src="/images/kjokken1.webp" alt="Kjøkkenprosjekt" width={600} height={400} placeholder="blur" blurDataURL="/images/kjokken1.webp" />
@@ -116,7 +125,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="hvorfoross" className={`${styles.fade} ${visibleSections["hvorfoross"] ? styles.visible : ""}`}>
+      <section
+        id="hvorfoross"
+        className={`${styles.section} ${styles.fade} ${visibleSections["hvorfoross"] ? styles.visible : ""}`}
+      >
         <h2>Hvorfor velge Excenta?</h2>
         <ul>
           <li>Skreddersydde løsninger etter dine tegninger</li>
