@@ -92,17 +92,19 @@ export default function Home() {
         className={`${styles.section} ${styles.fade} ${visibleSections["tjenester"] ? styles.visible : ""}`}
       >
         <h2>Våre tjenester</h2>
-        <div className={styles.service}>
-          <Image src="/images/tjeneste-bad.webp" alt="Bad" width={600} height={400} placeholder="blur" blurDataURL="/images/tjeneste-bad.webp" />
-          <p>Vi lager spesialtilpasset baderomsinnredning i MDF, eik finer og laminat, alltid tilpasset rommets dimensjoner og dine ønsker.</p>
-        </div>
-        <div className={styles.service}>
-          <Image src="/images/tjeneste-garderobe.webp" alt="Garderobe" width={600} height={400} placeholder="blur" blurDataURL="/images/tjeneste-garderobe.webp" />
-          <p>Vi designer og bygger garderober på mål som maksimerer lagringsplass og funksjonalitet.</p>
-        </div>
-        <div className={styles.service}>
-          <Image src="/images/tjeneste-kjokken.webp" alt="Kjøkken" width={600} height={400} placeholder="blur" blurDataURL="/images/tjeneste-kjokken.webp" />
-          <p>Skreddersydde kjøkken i slitesterke og elegante materialer. Kundens tegninger er vårt utgangspunkt.</p>
+        <div className={styles.imageGrid}>
+          <div>
+            <Image src="/images/tjeneste-bad.webp" alt="Bad" width={600} height={400} placeholder="blur" blurDataURL="/images/tjeneste-bad.webp" />
+            <p>Vi lager spesialtilpasset baderomsinnredning i MDF, eik finer og laminat, alltid tilpasset rommets dimensjoner og dine ønsker.</p>
+          </div>
+          <div>
+            <Image src="/images/tjeneste-garderobe.webp" alt="Garderobe" width={600} height={400} placeholder="blur" blurDataURL="/images/tjeneste-garderobe.webp" />
+            <p>Vi designer og bygger garderober på mål som maksimerer lagringsplass og funksjonalitet.</p>
+          </div>
+          <div>
+            <Image src="/images/tjeneste-kjokken.webp" alt="Kjøkken" width={600} height={400} placeholder="blur" blurDataURL="/images/tjeneste-kjokken.webp" />
+            <p>Skreddersydde kjøkken i slitesterke og elegante materialer. Kundens tegninger er vårt utgangspunkt.</p>
+          </div>
         </div>
       </section>
 
@@ -111,17 +113,19 @@ export default function Home() {
         className={`${styles.section} ${styles.fade} ${visibleSections["prosjekter"] ? styles.visible : ""}`}
       >
         <h2>Prosjekter</h2>
-        <div className={styles.project}>
-          <Image src="/images/kjokken1.webp" alt="Kjøkkenprosjekt" width={600} height={400} placeholder="blur" blurDataURL="/images/kjokken1.webp" />
-          <p>Et elegant kjøkken laget i eik finer, skreddersydd etter kundens mål.</p>
-        </div>
-        <div className={styles.project}>
-          <Image src="/images/skap1.webp" alt="Skapprosjekt" width={600} height={400} placeholder="blur" blurDataURL="/images/skap1.webp" />
-          <p>Plassbygd oppbevaringsløsning i malt MDF – perfekt tilpasset skråtak.</p>
-        </div>
-        <div className={styles.project}>
-          <Image src="/images/bad11.webp" alt="Badprosjekt" width={600} height={400} placeholder="blur" blurDataURL="/images/bad11.webp" />
-          <p>Baderomsinnredning i laminat, med praktisk og stilrent uttrykk.</p>
+        <div className={styles.imageGrid}>
+          <div>
+            <Image src="/images/kjokken1.webp" alt="Kjøkkenprosjekt" width={600} height={400} />
+            <p>Et elegant kjøkken laget i eik finer, skreddersydd etter kundens mål.</p>
+          </div>
+          <div>
+            <Image src="/images/skap1.webp" alt="Skapprosjekt" width={600} height={400} />
+            <p>Plassbygd oppbevaringsløsning i malt MDF – perfekt tilpasset skråtak.</p>
+          </div>
+          <div>
+            <Image src="/images/bad11.webp" alt="Badprosjekt" width={600} height={400} />
+            <p>Baderomsinnredning i laminat, med praktisk og stilrent uttrykk.</p>
+          </div>
         </div>
       </section>
 
