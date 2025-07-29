@@ -16,19 +16,8 @@ export default function HeroSlider() {
   }, []);
 
   return (
-    <div className="absolute inset-0 z-0">
-      {images.map((img, i) => (
-        <Image
-          key={img}
-          src={`/images/${img}`}
-          alt={`Hero image ${i + 1}`}
-          fill
-          priority
-          className={`object-cover transition-opacity duration-1000 ${i === index ? 'opacity-100' : 'opacity-0'}`}
-        />
-      ))}
-      {/* Mørkt filter over bildet */}
-      <div className="absolute inset-0 bg-black/50 z-10" />
+    <div className="absolute inset-0 z-0 opacity-50">
+      <img src="/images/hero1.webp" alt="Hero" className="w-full h-full object-cover" />
     </div>
   );
 }
