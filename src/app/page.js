@@ -140,7 +140,7 @@ export default function Home() {
         </ul>
       </section>
 
-      <footer id="kontakt">
+      <footer id="kontakt" className={styles.footer}>
         <p>Kontakt: post@excenta.no | Tlf: 46802748</p>
         <p>© {new Date().getFullYear()} Excenta AS – laget av <a href="https://dinnettside.no">dinnettside.no</a></p>
       </footer>
