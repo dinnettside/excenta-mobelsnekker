@@ -1,17 +1,14 @@
-import "./globals.css";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata = {
-  title: "Excenta Møbelsnekker | Skreddersydde møbler i høy kvalitet",
-  description: "Excenta AS – spesialtilpassede kjøkken, bad og garderober i MDF, eik finer og laminat. Vi skreddersyr etter dine tegninger og ønsker.",
+  title: "Møbelsnekker | Excenta AS",
+  description: "Skreddersydd håndverk i eik, MDF og laminat – laget på mål",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="no">
-      <body className={inter.className}>{children}</body>
+      <body className="font-sans scroll-smooth bg-white text-gray-900">
+        {children}
+      </body>
     </html>
   );
 }
