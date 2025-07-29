@@ -61,7 +61,7 @@ export default function Home() {
 
           {/* KJØKKEN */}
           <div className="flex flex-col md:flex-row items-center gap-8 text-left">
-            <img src="/tjeneste-kjokken.webp" alt="Skreddersydde kjøkken" className="w-full md:w-1/2 rounded shadow" />
+            <img src="/tjeneste-kjoken.webp" alt="Skreddersydde kjøkken" className="w-full md:w-1/2 rounded shadow" />
             <p className="md:w-1/2 text-gray-700">
               Våre kjøkkenløsninger kombinerer funksjonalitet og design – laget i materialer som MDF, eik finer eller laminat etter ønske.
             </p>
@@ -72,30 +72,29 @@ export default function Home() {
       {/* PROSJEKTER */}
       <section id="prosjekter" className="py-24 px-6 bg-white text-center">
         <h2 className="text-3xl font-serif font-bold mb-12">Tidligere prosjekter</h2>
-        <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
-          {/* Prosjekt 1 */}
-          <div className="text-left">
-            <img src="/kjokken1.webp" alt="Skreddersydd kjøkken i eik" className="w-full h-auto rounded shadow" />
-            <p className="mt-4 text-gray-700 text-sm">
-              Eikekjøkken tilpasset en familie i Oslo – skreddersydd med plass til både barn og gjester.
-            </p>
-          </div>
-
-          {/* Prosjekt 2 */}
-          <div className="text-left">
-            <img src="/skap1.webp" alt="Plassbygget oppbevaring under skråtak" className="w-full h-auto rounded shadow" />
-            <p className="mt-4 text-gray-700 text-sm">
-              Skapløsning under skråtak med optimal utnyttelse av plass og integrert oppbevaring.
-            </p>
-          </div>
-
-          {/* Prosjekt 3 */}
-          <div className="text-left">
-            <img src="/bad11.webp" alt="Moderne baderomsinnredning" className="w-full h-auto rounded shadow" />
-            <p className="mt-4 text-gray-700 text-sm">
-              Baderomsinnredning med minimalistiske linjer i eik og laminat – stilrent og funksjonelt.
-            </p>
-          </div>
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {[
+            {
+              bilde: 'kjokken1.webp',
+              tekst: 'Eikekjøkken tilpasset en familie i Oslo – skreddersydd med plass til både barn og gjester.',
+              alt: 'Skreddersydd kjøkken i eik'
+            },
+            {
+              bilde: 'skap1.webp',
+              tekst: 'Plassbygget oppbevaringsløsning i heltre, integrert i skråtak for optimal utnyttelse.',
+              alt: 'Skapløsning under skråtak'
+            },
+            {
+              bilde: 'bad11.webp',
+              tekst: 'Moderne baderomsinnredning i minimalistisk stil med skyvedører og rene linjer.',
+              alt: 'Moderne baderomsinnredning'
+            },
+          ].map(({ bilde, tekst, alt }, i) => (
+            <div key={i} className="shadow rounded-lg overflow-hidden bg-white">
+              <img src={`/${bilde}`} alt={alt} className="w-full h-auto object-cover" />
+              <p className="mt-4 text-gray-700 text-sm px-4 pb-4">{tekst}</p>
+            </div>
+          ))}
         </div>
       </section>
 
