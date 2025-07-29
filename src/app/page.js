@@ -1,4 +1,3 @@
-import styles from './page.module.css';
 'use client';
 import { useState } from 'react';
 import HeroSlider from '../components/HeroSlider';
@@ -41,45 +40,62 @@ export default function Home() {
       </section>
 
       {/* TJENESTER */}
-      <section id="tjenester" className="py-24 px-6 text-center bg-white">
+      <section id="tjenester" className="py-24 px-6 bg-white text-center">
         <h2 className="text-3xl font-serif font-bold mb-12">Våre tjenester</h2>
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {[
-            { navn: 'Skreddersydd kjøkken', bilde: 'tjeneste-kjokken.webp' },
-            { navn: 'Plassbygde garderober', bilde: 'tjeneste-garderobe.webp' },
-            { navn: 'Baderomsinnredning', bilde: 'tjeneste-bad.webp' },
-          ].map(({ navn, bilde }) => (
-            <div key={navn} className="bg-gray-50 rounded-xl shadow p-6 hover:shadow-lg transition text-left">
-              <img src={`/${bilde}`} alt={navn} className="w-full h-48 object-cover rounded mb-4" />
-              <h3 className="font-semibold text-lg">{navn}</h3>
-            </div>
-          ))}
+        <div className="space-y-20 max-w-6xl mx-auto">
+          {/* BAD */}
+          <div className="flex flex-col md:flex-row items-center gap-8 text-left">
+            <img src="/tjeneste-bad.webp" alt="Baderomsinnredning" className="w-full md:w-1/2 rounded shadow" />
+            <p className="md:w-1/2 text-gray-700">
+              Vi lager spesialtilpasset baderomsinnredning i MDF, eik finer og laminat, alltid tilpasset rommets behov og stil.
+            </p>
+          </div>
+
+          {/* GARDEROBE */}
+          <div className="flex flex-col md:flex-row items-center gap-8 text-left">
+            <img src="/tjeneste-garderobe.webp" alt="Plassbygde garderober" className="w-full md:w-1/2 rounded shadow" />
+            <p className="md:w-1/2 text-gray-700">
+              Vi designer og bygger garderober på mål som maksimerer lagringsplass og funksjonalitet – tilpasset både skråtak og nisjer.
+            </p>
+          </div>
+
+          {/* KJØKKEN */}
+          <div className="flex flex-col md:flex-row items-center gap-8 text-left">
+            <img src="/tjeneste-kjokken.webp" alt="Skreddersydde kjøkken" className="w-full md:w-1/2 rounded shadow" />
+            <p className="md:w-1/2 text-gray-700">
+              Våre kjøkkenløsninger kombinerer funksjonalitet og design – laget i materialer som MDF, eik finer eller laminat etter ønske.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* PROSJEKTER */}
       <section id="prosjekter" className="py-24 px-6 bg-white text-center">
         <h2 className="text-3xl font-serif font-bold mb-12">Tidligere prosjekter</h2>
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {[
-            {
-              bilde: 'images/prosjekt1.webp',
-              tekst: 'Eikekjøkken tilpasset en familie i Oslo – skreddersydd med plass til både barn og gjester.',
-            },
-            {
-              bilde: 'images/prosjekt2.webp',
-              tekst: 'Plassbygget oppbevaringsløsning i heltre, integrert i skråtak for optimal utnyttelse.',
-            },
-            {
-              bilde: 'images/prosjekt3.webp',
-              tekst: 'Moderne baderomsinnredning i minimalistisk stil med skyvedører og rene linjer.',
-            },
-          ].map(({ bilde, tekst }, i) => (
-            <div key={i} className="shadow rounded-lg overflow-hidden">
-              <img src={`/${bilde}`} alt={tekst} className="w-full h-auto object-cover" />
-              <p className="mt-4 text-gray-700 text-sm px-4">{tekst}</p>
-            </div>
-          ))}
+        <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
+          {/* Prosjekt 1 */}
+          <div className="text-left">
+            <img src="/kjokken1.webp" alt="Skreddersydd kjøkken i eik" className="w-full h-auto rounded shadow" />
+            <p className="mt-4 text-gray-700 text-sm">
+              Eikekjøkken tilpasset en familie i Oslo – skreddersydd med plass til både barn og gjester.
+            </p>
+          </div>
+
+          {/* Prosjekt 2 */}
+          <div className="text-left">
+            <img src="/skap1.webp" alt="Plassbygget oppbevaring under skråtak" className="w-full h-auto rounded shadow" />
+            <p className="mt-4 text-gray-700 text-sm">
+              Skapløsning under skråtak med optimal utnyttelse av plass og integrert oppbevaring.
+            </p>
+          </div>
+
+          {/* Prosjekt 3 */}
+          <div className="text-left">
+            <img src="/bad11.webp" alt="Moderne baderomsinnredning" className="w-full h-auto rounded shadow" />
+            <p className="mt-4 text-gray-700 text-sm">
+              Baderomsinnredning med minimalistiske linjer i eik og laminat – stilrent og funksjonelt.
+            </p>
+          </div>
         </div>
       </section>
 
