@@ -1,80 +1,137 @@
 'use client';
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import styles from "./page.module.css";
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-
-const projects = [
-  {
-    title: 'Skreddersydd kjøkken i heltre eik',
-    image: '/images/kjokken1.webp',
-    alt: 'Eikekjøkken med svart benkeplate',
-  },
-  {
-    title: 'Baderomsinnredning under skråtak',
-    image: '/images/tjeneste-bad.webp',
-    alt: 'Moderne bad med innebygd oppbevaring',
-  },
-  {
-    title: 'Plassbygget skyvedørsgarderobe',
-    image: '/images/tjeneste-garderobe.webp',
-    alt: 'Skyvedørsgarderobe i sort',
-  },
-  {
-    title: 'Hvitmalt vitrineseksjon',
-    image: '/images/skap1.webp',
-    alt: 'Vitrineskap med glass og innfelt lys',
-  },
-  {
-    title: 'Sort eik i minimalistisk stil',
-    image: '/images/hero5.webp',
-    alt: 'Moderne sort kjøkken i eik',
-  },
-  {
-    title: 'Spisebord på mål',
-    image: '/images/bad1.webp',
-    alt: 'Rundt spisebord i heltre',
-  },
+const heroImages = [
+  "/images/hero.webp",
+  "/images/hero5.webp",
+  "/images/hero6.webp",
 ];
 
-export default function Projects() {
-  return (
-    <section id="prosjekter" className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 text-center">
-        <motion.h2
-          className="text-3xl font-bold mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          Våre prosjekter
-        </motion.h2>
+export default function Home() {
+  const [currentImage, setCurrentImage] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [visibleSections, setVisibleSections] = useState({});
+  const [imageFade, setImageFade] = useState(true);
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {projects.map(({ title, image, alt }, index) => (
-            <motion.div
-              key={index}
-              className="rounded-xl overflow-hidden shadow hover:shadow-lg transition"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative w-full h-64">
-                <Image
-                  src={image}
-                  alt={alt}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-4 bg-gray-50">
-                <h3 className="text-lg font-semibold">{title}</h3>
-              </div>
-            </motion.div>
-          ))}
+  // Hero-bilde fade-effekt
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setImageFade(false);
+      setTimeout(() => {
+        setCurrentImage((prev) => (prev + 1) % heroImages.length);
+        setImageFade(true);
+      }, 300);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Observer for fade-in seksjoner
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleSections((prev) => ({
+              ...prev,
+              [entry.target.id]: true,
+            }));
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => sections.forEach((section) => observer.unobserve(section));
+  }, []);
+
+  return (
+    <main className={styles.main}>
+      <div className={styles.hero}>
+        <nav className={styles.menu}>
+          <div className={styles.logo}>Excenta AS</div>
+          <div className={styles.burger} onClick={() => setMenuOpen(!menuOpen)}>
+            ☰
+          </div>
+          <ul className={menuOpen ? `${styles.nav} ${styles.open}` : styles.nav}>
+            <li><a href="#omoss">Om oss</a></li>
+            <li><a href="#tjenester">Tjenester</a></li>
+            <li><a href="#prosjekter">Prosjekter</a></li>
+            <li><a href="#hvorfoross">Hvorfor oss</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+          </ul>
+        </nav>
+
+        <div className={`${styles.heroImage} ${imageFade ? styles.fadeIn : styles.fadeOut}`}>
+          <Image
+            src={heroImages[currentImage]}
+            alt="Hero image"
+            fill
+            style={{ objectFit: "cover" }}
+            priority
+            placeholder="blur"
+            blurDataURL="/images/hero.webp"
+          />
+          <div className={styles.heroOverlay} />
         </div>
       </div>
-    </section>
+
+      <section id="omoss" className={`${styles.fade} ${visibleSections["omoss"] ? styles.visible : ""}`}>
+        <h2>Om oss</h2>
+        <p>Excenta AS er en dedikert møbelsnekkerbedrift som spesialiserer seg på skreddersydde løsninger. Vi leverer kvalitet og presisjon – alltid tilpasset dine behov.</p>
+      </section>
+
+      <section id="tjenester" className={`${styles.fade} ${visibleSections["tjenester"] ? styles.visible : ""}`}>
+        <h2>Våre tjenester</h2>
+        <div className={styles.service}>
+          <Image src="/images/tjenste-bad.webp" alt="Bad" width={600} height={400} placeholder="blur" blurDataURL="/images/tjenste-bad.webp" />
+          <p>Vi lager spesialtilpasset baderomsinnredning i MDF, eik finer og laminat, alltid tilpasset rommets dimensjoner og dine ønsker.</p>
+        </div>
+        <div className={styles.service}>
+          <Image src="/images/tjenste-garderobe.webp" alt="Garderobe" width={600} height={400} placeholder="blur" blurDataURL="/images/tjenste-garderobe.webp" />
+          <p>Vi designer og bygger garderober på mål som maksimerer lagringsplass og funksjonalitet.</p>
+        </div>
+        <div className={styles.service}>
+          <Image src="/images/tjenste-kjokken.webp" alt="Kjøkken" width={600} height={400} placeholder="blur" blurDataURL="/images/tjenste-kjokken.webp" />
+          <p>Skreddersydde kjøkken i slitesterke og elegante materialer. Kundens tegninger er vårt utgangspunkt.</p>
+        </div>
+      </section>
+
+      <section id="prosjekter" className={`${styles.fade} ${visibleSections["prosjekter"] ? styles.visible : ""}`}>
+        <h2>Prosjekter</h2>
+        <div className={styles.project}>
+          <Image src="/images/kjokken1.webp" alt="Kjøkkenprosjekt" width={600} height={400} placeholder="blur" blurDataURL="/images/kjokken1.webp" />
+          <p>Et elegant kjøkken laget i eik finer, skreddersydd etter kundens mål.</p>
+        </div>
+        <div className={styles.project}>
+          <Image src="/images/skap1.webp" alt="Skapprosjekt" width={600} height={400} placeholder="blur" blurDataURL="/images/skap1.webp" />
+          <p>Plassbygd oppbevaringsløsning i malt MDF – perfekt tilpasset skråtak.</p>
+        </div>
+        <div className={styles.project}>
+          <Image src="/images/bad11.webp" alt="Badprosjekt" width={600} height={400} placeholder="blur" blurDataURL="/images/bad11.webp" />
+          <p>Baderomsinnredning i laminat, med praktisk og stilrent uttrykk.</p>
+        </div>
+      </section>
+
+      <section id="hvorfoross" className={`${styles.fade} ${visibleSections["hvorfoross"] ? styles.visible : ""}`}>
+        <h2>Hvorfor velge Excenta?</h2>
+        <ul>
+          <li>Skreddersydde løsninger etter dine tegninger</li>
+          <li>Vi holder prisene lave ved å bruke kundens tegninger som utgangspunkt</li>
+          <li>Gratis befaring og kontrollmåling</li>
+          <li>Du godkjenner produksjonstegningene før vi starter</li>
+          <li>Full oversikt over fremdrift og status</li>
+          <li>Vi står for montering</li>
+        </ul>
+      </section>
+
+      <footer id="kontakt">
+        <p>Kontakt: post@excenta.no | Tlf: 46802748</p>
+        <p>© {new Date().getFullYear()} Excenta AS – laget av <a href="https://dinnettside.no">dinnettside.no</a></p>
+      </footer>
+    </main>
   );
 }
