@@ -1,4 +1,4 @@
-import CardStackHero from '@/components/CardStackHero';
+import CardStackHero from './CardStackHero';
 
 export default function Home() {
   return (
